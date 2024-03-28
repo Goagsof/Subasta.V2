@@ -1,0 +1,121 @@
+﻿/* cuenta.css */
+
+* {
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #b997c8;
+}
+
+.cuenta-container {
+    width: 80%;
+    margin: 50px auto;
+}
+
+.usuario-info-container {
+    background-color: #7200a7;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.usuario-info {
+    text-align: center;
+}
+
+    .usuario-info h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: white
+    }
+
+    .usuario-info p {
+        margin: 5px 0;
+        color: white
+    }
+
+
+.subastas-container {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+    .subastas-container h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+.subasta-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.subasta-card {
+    width: calc(33.33% - 20px);
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .subasta-card h3 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .subasta-card p {
+        margin: 5px 0;
+    }
+
+.subasta-img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.botones-container {
+    text-align: center;
+}
+
+.boton-publicar,
+.boton-editar,
+.boton-inicio {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #44115a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+    .boton-publicar:hover,
+    .boton-editar:hover,
+    .boton-inicio:hover {
+        background-color: #6d1b8d;
+    }
+
+@media (max-width: 768px) {
+    .subasta-card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .cuenta-container {
+        width: 90%;
+    }
+
+    .subasta-card {
+        width: calc(100% - 20px);
+    }
+}

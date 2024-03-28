@@ -1,0 +1,89 @@
+﻿@model Subasta.Models.PerfilViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Editar Perfil</title>
+    <link href="~" rel="stylesheet" />
+    <link href="~/css/perfil.css" rel="stylesheet" /> 
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI CDN -->
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <!-- jQuery UI CSS CDN -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+</head>
+<body>
+    <div class="perfil-container">
+        <!-- Añadí la clase al contenedor -->
+        <h2>Editar Perfil</h2>
+        @using (Html.BeginForm("CambiarPerfil", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div>
+                @Html.LabelFor(model => model.Nombre)
+                @Html.TextBoxFor(model => model.Nombre)
+                @Html.ValidationMessageFor(model => model.Nombre)
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Apellido)
+                @Html.TextBoxFor(model => model.Apellido)
+                @Html.ValidationMessageFor(model => model.Apellido)
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.CorreoElectronico)
+                @Html.TextBoxFor(model => model.CorreoElectronico)
+                @Html.ValidationMessageFor(model => model.CorreoElectronico)
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Contraseña)
+                @Html.PasswordFor(model => model.Contraseña)
+                @Html.ValidationMessageFor(model => model.Contraseña)
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.FotoPerfil)
+                @Html.TextBoxFor(model => model.FotoPerfil)
+                @Html.ValidationMessageFor(model => model.FotoPerfil)
+            </div>
+
+            <input type="submit" value="Guardar cambios" />
+        }
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Efecto de desvanecimiento al cargar la página
+            $(".perfil-container").hide().fadeIn(1000);
+
+            // Efecto de resaltado al enfocar un campo de entrada
+            $("input[type=text], input[type=password]").focus(function () {
+                $(this).effect("highlight", { color: "#f6eafd" }, 500);
+            });
+
+            // Efecto de sacudida al enviar el formulario con campos vacíos
+            $("form").submit(function (e) {
+                var nombre = $("#Nombre").val();
+                var apellido = $("#Apellido").val();
+                var correo = $("#CorreoElectronico").val();
+                var contraseña = $("#Contraseña").val();
+                var foto = $("#FotoPerfil").val();
+                if (nombre == "" || apellido == "" || correo == "" || contraseña == "" || foto == "") {
+                    e.preventDefault();
+                    $(".perfil-container").effect("shake", { distance: 10 }, 500);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

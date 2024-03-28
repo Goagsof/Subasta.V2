@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Doble</title>
+    <link href="~/css/doble.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="verification-section">
+                <h2>Ingrese el código de verificación:</h2>
+                @using (Html.BeginForm("VerificarCodigo", "Home", FormMethod.Post))
+                {
+                    <label for="codigo">Código:</label>
+                    <input type="text" name="codigo" id="codigo">
+                    <input type="submit" value="Verificar código">
+                }
+            </div>
+            <div class="send-code-section">
+                <h2>Enviar código de verificación:</h2>
+                @using (Html.BeginForm("EnviarCodigo", "Home", FormMethod.Post))
+                {
+                    <input type="submit" value="Enviar código">
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

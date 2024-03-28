@@ -1,0 +1,56 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transferencia Bancaria</title>
+    <link rel="stylesheet" href="~/css/Transferencia.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Información del Usuario</h2>
+        <p>Nombre: @Model.UserInfo.Nombre</p>
+        <p>Apellido: @Model.UserInfo.Apellido</p>
+        <p>Correo Electrónico: @Model.UserInfo.CorreoElectronico</p>
+        <h2>Total a Pagar</h2>
+        <p>Total: @Model.TotalPagar</p>
+    </div>
+    <div class="container">
+        <h2>Transferencia Bancaria</h2>
+        <form action="/procesar-transferencia" method="POST" class="bank-transfer-form">
+            <div class="form-group">
+                <label for="cuenta-origen">Cuenta Origen</label>
+                <input type="text" id="cuenta-origen" name="cuenta-origen" required>
+            </div>
+            <div class="form-group">
+                <label for="cuenta-destino">Cuenta Destino</label>
+                <input type="text" id="cuenta-destino" name="cuenta-destino" required>
+            </div>
+            <div class="form-group">
+                <label for="detalle">Detalle</label>
+                <input type="text" id="detalle" name="detalle" required>
+            </div>
+            <div class="form-group">
+                <label for="monto">Monto</label>
+                <input type="text" id="monto" name="monto" required>
+            </div>
+            <button type="submit" class="transfer-submit-button">Realizar Transferencia</button>
+        </form>
+        <button onclick="payButtonClicked()" class="pay-button">Pagar</button>
+    </div>
+
+    <script>
+        function payButtonClicked() {
+            alert("Transferencia realizada con éxito");
+            window.location.href = '/Home/Index';
+        }
+    </script>
+</body>
+</html>
+
+

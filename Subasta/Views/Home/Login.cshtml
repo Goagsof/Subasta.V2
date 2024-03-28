@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Inicio de Sesión";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/css/login.css" rel="stylesheet" />
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI CDN -->
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <!-- jQuery UI CSS CDN -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form action="@Url.Action("Login", "Home")" method="post">
+            <div>
+                <label for="CorreoElectronico">Correo Electrónico:</label>
+                <input type="text" name="CorreoElectronico" id="CorreoElectronico" />
+            </div>
+            <div>
+                <label for="Contraseña">Contraseña:</label>
+                <input type="password" name="Contraseña" id="Contraseña" onkeyup="evaluarFortalezaContraseña()" />
+            </div>
+            <div class="error-message">
+                @if (!string.IsNullOrEmpty(ViewBag.Error))
+                {
+                    <p id="error">@ViewBag.Error</p>
+                }
+            </div>
+            <br />
+            <input type="submit" value="Iniciar Sesión" />
+        </form>
+        <p>¿No tienes una cuenta? <a href="@Url.Action("Registro", "Home")">Regístrate aquí</a>.</p>
+        <p>¿Olvidaste tu contraseña? <a href="@Url.Action("EnviarCorreo", "Home")">Recupérala aquí</a>.</p>
+
+    </div>
+    <script>
+        function evaluarFortalezaContraseña() {
+            var contraseña = $("#Contraseña").val();
+            var fortalezaContraseña = $("#fortalezaContraseña");
+            if (contraseña.length == 0) {
+                fortalezaContraseña.text("");
+            } else if (contraseña.length < 8) {
+                fortalezaContraseña.text("Contraseña: Poco segura");
+                fortalezaContraseña.css("color", "red");
+            } else if (contraseña.length < 12) {
+                fortalezaContraseña.text("Contraseña: Segura");
+                fortalezaContraseña.css("color", "orange");
+            } else {
+                fortalezaContraseña.text("Contraseña: Muy segura");
+                fortalezaContraseña.css("color", "green");
+            }
+        }
+
+        $(document).ready(function () {
+            $(".login-container").hide().fadeIn(1000);
+
+            $("input[type=text], input[type=password]").focus(function () {
+                $(this).effect("highlight", { color: "#b154e3" }, 500);
+            });
+
+            $("form").submit(function (e) {
+                var correo = $("#CorreoElectronico").val();
+                var contraseña = $("#Contraseña").val();
+                if (correo == "" || contraseña == "") {
+                    e.preventDefault();
+                    $(".login-container").effect("shake", { distance: 10 }, 500);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

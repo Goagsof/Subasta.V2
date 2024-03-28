@@ -1,0 +1,40 @@
+﻿@model Subasta.Models.RecuperacionViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Recuperar Contraseña</title>
+    <link rel="stylesheet" type="text/css" href="~/css/recuperacion.css">
+</head>
+<body>
+    <div id="container">
+        @using (Html.BeginForm("CambiarContraseña", "Home", FormMethod.Post, new { @class = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label for="NuevaContraseña">Nueva Contraseña:</label>
+                @Html.PasswordFor(model => model.NuevaContraseña, new { @class = "input-field" })
+                @Html.ValidationMessageFor(model => model.NuevaContraseña, "", new { @class = "error-message" })
+            </div>
+            <div class="form-group">
+                <label for="ConfirmarContraseña">Confirmar Contraseña:</label>
+                @Html.PasswordFor(model => model.ConfirmarContraseña, new { @class = "input-field" })
+                @Html.ValidationMessageFor(model => model.ConfirmarContraseña, "", new { @class = "error-message" })
+            </div>
+            @Html.HiddenFor(model => model.CorreoElectronico)
+            <input type="submit" value="Guardar" class="btn">
+        }
+        <div>
+            <p>@ViewBag.SuccessMessage</p>
+        </div>
+        <div>
+            <p>@ViewBag.ErrorMessage</p>
+        </div>
+    </div>
+</body>
+</html>

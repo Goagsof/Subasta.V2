@@ -1,0 +1,156 @@
+﻿.visa-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    width: 300px;
+    height: 180px;
+    background-image: radial-gradient( circle 897px at 9% 80.3%, rgba(55, 60, 245, 1) 0%, rgba(234, 161, 15, 0.9) 100.2% );
+    border-radius: 10px;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    gap: 15px;
+}
+
+body {
+    background-color: #b997c8;
+}
+
+.logoContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: fit-content;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 18px;
+}
+
+.svgLogo {
+    height: 40px;
+    width: auto;
+}
+
+.inputstyle::placeholder {
+    color: #ffffff;
+}
+
+.inputstyle {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    caret-color: red;
+    font-size: 13px;
+    height: 25px;
+    letter-spacing: 1.5px;
+}
+
+.number-container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+#cardNumber {
+    width: 100%;
+    height: 25px;
+}
+
+.name-date-cvv-container {
+    width: 100%;
+    height: 25px;
+    display: flex;
+    gap: 10px;
+}
+
+.name-wrapper {
+    width: 60%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.expiry-wrapper,
+.cvv-wrapper {
+    width: 30%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.cvv-wrapper {
+    width: 10%;
+}
+
+#expiry,
+#cvv {
+    width: 100%;
+}
+
+.input-label {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: #e2e2e2;
+    width: 100%;
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+/* Estilos específicos para la pantalla de pago por tarjeta */
+.card-payment-form {
+    margin-top: 20px;
+}
+
+.card-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+    .card-input:last-child {
+        margin-bottom: 20px;
+    }
+
+.card-submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    .card-submit-button:hover {
+        background-color: #45a049;
+    }

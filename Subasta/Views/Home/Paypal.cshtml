@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago PayPal</title>
+    <link rel="stylesheet" href="~/css/paypal.css">
+</head>
+<body>
+    <div class="container">
+        <div class="paypal-logo">
+            <img src="~/imagenes/logo-Paypal.png" alt="PayPal Logo">
+        </div>
+        <div class="container">
+            <h2>Información del Usuario</h2>
+            <p>Nombre: @Model.UserInfo.Nombre</p>
+            <p>Apellido: @Model.UserInfo.Apellido</p>
+            <p>Correo Electrónico: @Model.UserInfo.CorreoElectronico</p>
+            <h2>Total a Pagar</h2>
+            <p>Total: @Model.TotalPagar</p>
+        </div>
+        <div class="paypal-button">
+            <button id="payButton" onclick="showPaymentSuccess()">Pagar con PayPal</button>
+        </div>
+    </div>
+    <script>
+        function showPaymentSuccess() {
+            alert("¡Pago realizado con éxito!");
+            window.location.href = '@Url.Action("Index", "Home")'; 
+        }
+    </script>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

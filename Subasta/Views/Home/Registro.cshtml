@@ -1,0 +1,274 @@
+﻿@model Subasta.Models.RegistroViewModel
+
+@{
+    ViewBag.Title = "Registro";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/registro.css" rel="stylesheet" />
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI CDN -->
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <!-- jQuery UI CSS CDN -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+</head>
+<body>
+    <div class="registro-container">
+        @using (Html.BeginForm("Registro", "Home", FormMethod.Post, new { id = "formularioRegistro" }))
+        {
+            @Html.ValidationSummary(true)
+
+        <div class="registro-usuario">
+            <h2>Registro</h2>
+            <div>
+                @Html.LabelFor(m => m.Nombre)
+                @Html.TextBoxFor(m => m.Nombre)
+                @Html.ValidationMessageFor(m => m.Nombre)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.Apellido)
+                @Html.TextBoxFor(m => m.Apellido)
+                @Html.ValidationMessageFor(m => m.Apellido)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.CorreoElectronico)
+                @Html.TextBoxFor(m => m.CorreoElectronico)
+                @Html.ValidationMessageFor(m => m.CorreoElectronico)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.Contraseña)
+                @Html.PasswordFor(m => m.Contraseña, new { id = "Contraseña" })
+                <span id="indicadorFortalezaContraseña" style="display: none;"></span>
+                @Html.ValidationMessageFor(m => m.Contraseña, "", new { @class = "text-danger", id = "errorContraseña" })
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.ConfirmarContraseña)
+                @Html.PasswordFor(m => m.ConfirmarContraseña)
+                @Html.ValidationMessageFor(m => m.ConfirmarContraseña)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Provincia, "Provincia:")
+                @Html.DropDownListFor(m => m.Provincia, new SelectList(new List<string> { "San José", "Cartago", "Alajuela", "Heredia", "Guanacaste", "Puntarenas", "Limón" }), "Seleccione una provincia")
+                @Html.ValidationMessageFor(m => m.Provincia)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Canton, "Cantón:")
+                @Html.DropDownListFor(m => m.Canton, new SelectList(new List<string>(), "Seleccione un cantón"))
+                @Html.ValidationMessageFor(m => m.Canton)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Distrito, "Distrito:")
+                @Html.DropDownListFor(m => m.Distrito, new SelectList(new List<string>(), "Seleccione un distrito"))
+                @Html.ValidationMessageFor(m => m.Distrito)
+            </div>
+
+        </div>
+
+            <div class="preguntas-seguridad">
+                <h2>Preguntas de seguridad</h2>
+                <div>
+                    @Html.LabelFor(m => m.PreguntaID1, "Pregunta 1:")
+                    @Html.DropDownListFor(m => m.PreguntaID1, new SelectList(Model.PreguntasDeSeguridad, "PreguntaID", "Pregunta"), "Seleccione una pregunta")
+                    @Html.ValidationMessageFor(m => m.PreguntaID1)
+                    <br />
+                    @Html.LabelFor(m => m.Respuesta1)
+                    @Html.TextBoxFor(m => m.Respuesta1)
+                    @Html.ValidationMessageFor(m => m.Respuesta1)
+                </div>
+
+                <div>
+                    @Html.LabelFor(m => m.PreguntaID2, "Pregunta 2:")
+                    @Html.DropDownListFor(m => m.PreguntaID2, new SelectList(Model.PreguntasDeSeguridad, "PreguntaID", "Pregunta"), "Seleccione una pregunta")
+                    @Html.ValidationMessageFor(m => m.PreguntaID2)
+                    <br />
+                    @Html.LabelFor(m => m.Respuesta2)
+                    @Html.TextBoxFor(m => m.Respuesta2)
+                    @Html.ValidationMessageFor(m => m.Respuesta2)
+                </div>
+
+                <div>
+                    @Html.LabelFor(m => m.PreguntaID3, "Pregunta 3:")
+                    @Html.DropDownListFor(m => m.PreguntaID3, new SelectList(Model.PreguntasDeSeguridad, "PreguntaID", "Pregunta"), "Seleccione una pregunta")
+                    @Html.ValidationMessageFor(m => m.PreguntaID3)
+                    <br />
+                    @Html.LabelFor(m => m.Respuesta3)
+                    @Html.TextBoxFor(m => m.Respuesta3)
+                    @Html.ValidationMessageFor(m => m.Respuesta3)
+                </div>
+            </div>
+
+            <div style="clear:both;"></div>
+
+            <div class="boton-submit">
+                <button type="submit">Registrarse</button>
+            </div>
+
+            <div class="volver-inicio">
+                <a href="@Url.Action("Login", "Home")">Volver al inicio de sesión</a>
+            </div>
+        }
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $(".registro-container").hide().fadeIn(1000);
+
+            $("input[type=text], input[type=password]").focus(function () {
+                $(this).effect("highlight", { color: "#f6eafd" }, 500);
+            });
+
+            $("#btnSiguiente").click(function (e) {
+                var nombre = $("#Nombre").val();
+                var apellido = $("#Apellido").val();
+                var correo = $("#CorreoElectronico").val();
+                var contraseña = $("#Contraseña").val();
+                var confirmarContraseña = $("#ConfirmarContraseña").val();
+                if (nombre == "" || apellido == "" || correo == "" || contraseña == "" || confirmarContraseña == "") {
+                    e.preventDefault();
+                    $(".registro-container").effect("shake", { distance: 10 }, 500);
+                } else if (contraseña != confirmarContraseña) {
+                    e.preventDefault();
+                    $("#errorConfirmarContraseña").text("Las contraseñas no coinciden.");
+                    $("#ConfirmarContraseña").css("border-color", "red");
+                } else {
+                    $("#preguntas-container").show();
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            function verificarFortalezaContraseña(contraseña) {
+                var longitudMínima = 8;
+                var contieneMayúsculas = /[A-Z]/.test(contraseña);
+                var contieneMinúsculas = /[a-z]/.test(contraseña);
+                var contieneNúmeros = /\d/.test(contraseña);
+
+                if (contraseña.length < longitudMínima ||
+                    !contieneMayúsculas ||
+                    !contieneMinúsculas ||
+                    !contieneNúmeros) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            $("#Contraseña").keyup(function () {
+                var contraseña = $(this).val();
+
+                var longitudMínima = 8;
+                var contieneMayúsculas = /[A-Z]/.test(contraseña);
+                var contieneMinúsculas = /[a-z]/.test(contraseña);
+                var contieneNúmeros = /\d/.test(contraseña);
+
+                var indicador = $("#indicadorFortalezaContraseña");
+
+                indicador.show();
+
+                if (contraseña.length < longitudMínima || !contieneMayúsculas || !contieneMinúsculas || !contieneNúmeros) {
+                    indicador.text("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
+                    indicador.css("color", "red");
+                } else {
+                    indicador.text("La contraseña cumple con los requisitos mínimos.");
+                    indicador.css("color", "green");
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#formularioRegistro").submit(function (event) {
+
+                var nombre = $("#Nombre").val();
+                var apellido = $("#Apellido").val();
+                var correo = $("#CorreoElectronico").val();
+                var contraseña = $("#Contraseña").val();
+                var confirmarContraseña = $("#ConfirmarContraseña").val();
+
+                if (nombre.trim() === "" || apellido.trim() === "" || correo.trim() === "" || contraseña.trim() === "" || confirmarContraseña.trim() === "") {
+                    alert("Por favor, complete todos los campos.");
+                    return;
+                }
+
+                this.submit();
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            function habilitarBotonRegistro() {
+                var nombre = $("#Nombre").val().trim();
+                var apellido = $("#Apellido").val().trim();
+                var correo = $("#CorreoElectronico").val().trim();
+                var contraseña = $("#Contraseña").val().trim();
+                var confirmarContraseña = $("#ConfirmarContraseña").val().trim();
+
+                if (nombre !== "" && apellido !== "" && correo !== "" && contraseña !== "" && confirmarContraseña !== "") {
+                    $("#btnRegistro").prop("disabled", false); 
+                } else {
+                    $("#btnRegistro").prop("disabled", true); 
+                }
+            }
+
+            habilitarBotonRegistro();
+            $("input[type='text'], input[type='password']").on("input", habilitarBotonRegistro);
+        });
+
+    </script>
+
+    <script>
+    $(document).ready(function () {
+        $("#Provincia").change(function () {
+            var provincia = $(this).val();
+            $.ajax({
+                url: "@Url.Action("ObtenerCantones", "Home")",
+                type: "GET",
+                data: { provincia: provincia },
+                success: function (data) {
+                    var selectCanton = $("#Canton");
+                    selectCanton.empty();
+                    $.each(data, function (index, value) {
+                        selectCanton.append($("<option></option>").val(value).html(value));
+                    });
+                }
+            });
+        });
+
+        $("#Canton").change(function () {
+            var provincia = $("#Provincia").val();
+            var canton = $(this).val();
+            $.ajax({
+                url: "@Url.Action("ObtenerDistritos", "Home")",
+                type: "GET",
+                data: { provincia: provincia, canton: canton },
+                success: function (data) {
+                    var selectDistrito = $("#Distrito");
+                    selectDistrito.empty();
+                    $.each(data, function (index, value) {
+                        selectDistrito.append($("<option></option>").val(value).html(value));
+                    });
+                }
+            });
+        });
+    });
+    </script>
+
+
+</body>
+</html>

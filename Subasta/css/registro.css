@@ -1,0 +1,110 @@
+﻿/* Estilos generales */
+* {
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #b997c8;
+}
+
+/* Estilos del contenedor del registro */
+.registro-container {
+    width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(to right, #44115a, #b154e3);
+    color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+/* Estilos del contenedor de registro de usuario */
+.registro-usuario {
+    width: 48%;
+    float: left;
+}
+
+/* Estilos del contenedor de las preguntas de seguridad */
+.preguntas-seguridad {
+    width: 48%;
+    float: right;
+}
+
+/* Estilos de los campos de entrada */
+input[type=text], input[type=password] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+}
+
+/* Estilos de los ComboBox (select) */
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Estilos del botón de enviar */
+button[type=submit] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    color: #44115a;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+    /* Estilos del botón de enviar al pasar el ratón */
+    button[type=submit]:hover {
+        background-color: #44115a;
+        color: white;
+    }
+
+/* Estilos del enlace de inicio de sesión */
+a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+    /* Estilos del enlace de inicio de sesión al pasar el ratón */
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+    .registro-container {
+        width: 90%;
+    }
+
+    /* Ajustar ancho de los campos de entrada en pantallas pequeñas */
+    input[type=text], input[type=password], select {
+        width: calc(100% - 20px);
+    }
+
+    /* Ajustar ancho de los contenedores en pantallas pequeñas */
+    .registro-usuario, .preguntas-seguridad {
+        width: 100%;
+        float: none;
+    }
+}

@@ -1,0 +1,215 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 100px;
+    background-color: #b997c8;
+}
+
+.container {
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+header {
+    background-color: #7200a7;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 200px;
+}
+
+#searchInput {
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 100px;
+    display: block;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.btn-profile-container {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    transform: translateX(85%);
+}
+
+.btn-profile-img {
+    width: 11%;
+    margin-top: 15px;
+    height: auto;
+    cursor: pointer;
+}
+
+.btn-ganar-container {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+.btn-ganar-img {
+    width: 12%;
+    margin-top: 15px;
+    height: auto;
+    cursor: pointer;
+}
+
+.card {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin: 0 auto;
+    max-width: 250px;
+    height: auto;
+    margin-right: 1%;
+    float: left;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+    .card:last-child {
+        margin-right: 0;
+    }
+
+.card-img-top {
+    max-width: 250px;
+    max-height: 250px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: block;
+    margin: auto;
+}
+
+.card-body {
+    padding: 10px;
+    text-align: center;
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    margin-bottom: 5px;
+}
+
+.btn-pujar {
+    background-color: #007bff;
+    color: white; 
+    border: none; 
+    border-radius: 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+    .btn-pujar:hover {
+        background-color: #0056b3; 
+    }
+#filterInput {
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 100px;
+    display: block;
+    padding: 15px 20px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    font-size: 16px;
+}
+
+
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+
+    .card {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    header {
+        text-align: center;
+        width: 100%;
+    }
+
+    .logo {
+        margin: 0 auto;
+    }
+
+    .cart-container {
+        position: static;
+        margin: 0 auto;
+    }
+
+    .btn-profile-container {
+        top: 15px;
+        right: 60px;
+    }
+
+    .btn-profile-img,
+    .btn-ganar-img {
+        width: 3rem;
+        height: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    header {
+        text-align: center;
+        width: 100vw;
+    }
+
+    .card {
+        width: 100vw;
+    }
+
+
+    .btn-profile-container {
+        top: 20px;
+        right: 40px;
+    }
+
+    .btn-ganar-container {
+        top: 20px;
+        left: 10px;
+    }
+
+    .btn-profile-img,
+    .btn-ganar-img {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    #searchInput {
+        font-size: 14px; 
+    }
+}

@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Ganador</title>
+    <link href="~" rel="stylesheet">
+    <link href="~/css/ganador.css" rel="stylesheet">
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI CDN -->
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <!-- jQuery UI CSS CDN -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <!-- Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Subastas Ganadas</h1>
+        </div>
+    </header>
+    <div class="ganador-container">
+        <div class="subasta-cards">
+            @foreach (var subastaGanada in Model)
+            {
+                <div class="subasta-card">
+                    <h3>@subastaGanada.Titulo</h3>
+                    <p>Subasta ID: @subastaGanada.SubastaID</p>
+                    <p>Precio: @subastaGanada.Precio</p>
+                    <p>Fecha Ganado: @subastaGanada.FechaGanado</p>
+                    <p>Ganador: @subastaGanada.Usuario</p>
+                    <img src="@subastaGanada.ImagenProducto" alt="Imagen del producto" class="subasta-img">
+                    <select class="select2" onchange="redirect(this)">
+                        <option value="">Seleccionar método de pago</option>
+                        <option value="@Url.Action("Paypal", "Home")">PayPal</option>
+                        <option value="@Url.Action("Tarjeta", "Home")">Tarjeta</option>
+                        <option value="@Url.Action("Transferencia", "Home")">Transferencia</option>
+                    </select>
+                </div>
+            }
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".ganador-container").hide().fadeIn(1000);
+            $(".select2").select2({
+                width: '100%'
+            });
+        });
+
+        function redirect(select) {
+            var selectedOption = select.value; 
+
+            if (selectedOption) {
+                window.location.href = selectedOption;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+﻿/* ganador.css */
+
+* {
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #b997c8;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #44115a;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.header-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.ganador-container {
+    width: 80%;
+    margin: 50px auto;
+}
+
+.subasta-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.subasta-card {
+    width: calc(33.33% - 20px);
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .subasta-card h3 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .subasta-card p {
+        margin: 5px 0;
+    }
+
+.subasta-img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+select {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .subasta-card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .ganador-container {
+        width: 90%;
+    }
+
+    .subasta-card {
+        width: calc(100% - 20px);
+    }
+}

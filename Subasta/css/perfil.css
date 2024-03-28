@@ -1,0 +1,62 @@
+﻿﻿ /* Estilos generales */
+* {
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #b997c8;
+}
+
+/* Estilos del contenedor del perfil */
+.perfil-container {
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(to right, #44115a, #b154e3); 
+    color: white; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+}
+
+/* Estilos del título */
+h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* Estilos de los campos de entrada */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.5); 
+    font-size: 18px;
+}
+
+/* Estilos del botón de enviar */
+input[type=submit] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    background-color: white; 
+    color: #44115a;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 480px) {
+    .perfil-container {
+        width: 90%;
+    }
+}

@@ -1,0 +1,108 @@
+﻿@model Subasta.Models.CuentaViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/css/cuenta.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+</head>
+<body>
+    <div class="cuenta-container">
+        <div class="usuario-info-container">
+            <div class="usuario-info">
+                <h2>Información del Usuario</h2>
+                <p>Nombre: @Model.Nombre</p>
+                <p>Apellido: @Model.Apellido</p>
+                <p>Correo Electrónico: @Model.CorreoElectronico</p>
+            </div>
+        </div>
+
+        <div class="subastas-container">
+            <h2>Subastas Publicadas</h2>
+            @if (Model.SubastasPublicadas != null)
+            {
+                <div class="subasta-cards">
+                    @foreach (var subasta in Model.SubastasPublicadas)
+                    {
+                        <div class="subasta-card">
+                            <h3>@subasta.Titulo</h3>
+                            <p>Descripción: @subasta.Descripcion</p>
+                            <p>Precio Actual: @subasta.PrecioActual</p>
+                            <p>Fecha de Inicio: @subasta.FechaInicio</p>
+                            <p>Fecha de Fin: @subasta.FechaFin</p>
+                            <p>Estado: @subasta.Estado</p>
+                            <img src="@subasta.ImagenProducto" alt="Imagen del Producto" class="subasta-img" />
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No hay subastas publicadas.</p>
+            }
+        </div>
+        <div class="botones-container">
+            <button class="boton-publicar" onclick="location.href='@Url.Action("Publicar", "Home")'">Publicar</button>
+            <button class="boton-editar" onclick="location.href='@Url.Action("Perfil", "Home")'">Editar Perfil</button>
+            <button class="boton-inicio" onclick="location.href='@Url.Action("Index", "Home")'">Ir a Inicio</button>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        $(".inicio-container").hide().fadeIn(1000);
+
+        $(".search-input").focus(function () {
+            $(this).effect("highlight", { color: "#f6eafd" }, 500);
+        });
+
+        $("button").click(function () {
+            $(this).effect("shake", { distance: 10 }, 500);
+        });
+
+        $("#filterInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#subastasContainer .card").filter(function () {
+                $(this).toggle($(this).find(".card-title").text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        $(".card-text").each(function () {
+            var fechaFin = $(this).text(); 
+            var fechaActual = new Date(); 
+            var diferencia = Date.parse(fechaFin) - Date.parse(fechaActual); 
+            var segundos = Math.floor((diferencia / 1000) % 60); 
+            var minutos = Math.floor((diferencia / 1000 / 60) % 60); 
+            var horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24); 
+            var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24)); 
+            var tiempo = dias + "d " + horas + "h " + minutos + "m " + segundos + "s "; 
+            $(this).text("Tiempo restante: " + tiempo); 
+        });
+
+        setInterval(function () {
+            $(".card-text").each(function () {
+                var fechaFin = $(this).text(); 
+                var fechaActual = new Date(); 
+                var diferencia = Date.parse(fechaFin) - Date.parse(fechaActual); 
+                var segundos = Math.floor((diferencia / 1000) % 60); 
+                var minutos = Math.floor((diferencia / 1000 / 60) % 60); 
+                var horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24); 
+                var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                var tiempo = dias + "d " + horas + "h " + minutos + "m " + segundos + "s "; 
+                $(this).text("Tiempo restante: " + tiempo); 
+            });
+        }, 1000);
+    });
+
+</script>

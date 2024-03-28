@@ -1,0 +1,111 @@
+﻿@model Subasta.Models.UserInfoViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago con Tarjeta</title>
+    <link rel="stylesheet" href="~/css/tarjeta.css">
+</head>
+<body>
+    <div class="container">
+        <div class="container">
+            <div class="visa-card">
+                <div class="logoContainer">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         x="0px"
+                         y="0px"
+                         width="23"
+                         height="23"
+                         viewBox="0 0 48 48"
+                         class="svgLogo">
+                        <path fill="#ff9800"
+                              d="M32 10A14 14 0 1 0 32 38A14 14 0 1 0 32 10Z"></path>
+                        <path fill="#d50000"
+                              d="M16 10A14 14 0 1 0 16 38A14 14 0 1 0 16 10Z"></path>
+                        <path fill="#ff3d00"
+                              d="M18,24c0,4.755,2.376,8.95,6,11.48c3.624-2.53,6-6.725,6-11.48s-2.376-8.95-6-11.48 C20.376,15.05,18,19.245,18,24z"></path>
+                    </svg>
+                </div>
+                <div class="number-container">
+                    <label class="input-label" for="cardNumber">CARD NUMBER</label>
+                    <input class="inputstyle"
+                           id="cardNumber"
+                           placeholder="XXXX XXXX XXXX XXXX"
+                           name="cardNumber"
+                           type="text" />
+                </div>
+
+                <div class="name-date-cvv-container">
+                    <div class="name-wrapper">
+                        <label class="input-label" for="holderName">CARD HOLDER</label>
+                        <input class="inputstyle"
+                               id="holderName"
+                               placeholder="NAME"
+                               type="text" />
+                    </div>
+
+                    <div class="expiry-wrapper">
+                        <label class="input-label" for="expiry">VALID THRU</label>
+                        <input class="inputstyle" id="expiry" placeholder="MM/YY" type="text" />
+                    </div>
+                    <div class="cvv-wrapper">
+                        <label class="input-label" for="cvv">CVV</label>
+                        <input class="inputstyle"
+                               placeholder="***"
+                               maxlength="3"
+                               id="cvv"
+                               type="password" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <h2>Información del Usuario</h2>
+                <p>Nombre: @Model.UserInfo.Nombre</p>
+                <p>Apellido: @Model.UserInfo.Apellido</p>
+                <p>Correo Electrónico: @Model.UserInfo.CorreoElectronico</p>
+                <h2>Total a Pagar</h2>
+                <p>Total: @Model.TotalPagar</p>
+            </div>
+            <div class="paypal-button">
+                <button id="payButton" onclick="showPaymentSuccess()">Pagar con Tarjeta</button>
+            </div>
+        </div>
+        <div class="tarjeta-formulario">
+            <h2>Información de Pago</h2>
+            <form action="/procesar-pago" method="POST" class="card-payment-form">
+                <div class="form-group">
+                    <label for="nombre-tarjeta">Nombre en la Tarjeta</label>
+                    <input type="text" id="nombre-tarjeta" name="nombre-tarjeta" required class="card-input">
+                </div>
+                <div class="form-group">
+                    <label for="numero-tarjeta">Número de Tarjeta</label>
+                    <input type="text" id="numero-tarjeta" name="numero-tarjeta" required class="card-input">
+                </div>
+                <div class="form-group">
+                    <label for="fecha-expiracion">Fecha de Expiración</label>
+                    <input type="text" id="fecha-expiracion" name="fecha-expiracion" placeholder="MM/AA" required class="card-input">
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" required class="card-input">
+                </div>
+                <button type="submit" class="card-submit-button">Pagar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showPaymentSuccess() {
+            alert("¡Pago realizado con éxito!");
+            window.location.href = '@Url.Action("Index", "Home")';
+        }
+    </script>
+</body>
+</html>

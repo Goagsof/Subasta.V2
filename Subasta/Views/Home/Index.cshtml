@@ -1,0 +1,96 @@
+﻿@model List<Subasta.Models.InicioViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~" rel="stylesheet" />
+    <link href="~/css/inicio.css" rel="stylesheet" />
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI CDN -->
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <!-- jQuery UI CSS CDN -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+</head>
+<body>
+    <div class="inicio-container">
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center mt-2">
+                        <input type="text" id="filterInput" class="form-control search-input" placeholder="Buscar...">
+                    </div>
+                    <div class="btn-profile-container">
+                        <a href="@Url.Action("Cuenta", "Home")">
+                            <img src="~/imagenes/perfil.png" alt="Cuenta" class="btn-profile-img">
+                        </a>
+                    </div>
+                    <div class="btn-ganar-container">
+                        <a href="@Url.Action("Ganador", "Home")">
+                            <img src="~/imagenes/trofeo.png" alt="Mis Subastas Ganadas" class="btn-ganar-img">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+            <div id="subastasContainer" class="container">
+                <div class="row">
+                    @foreach (var subasta in Model)
+                    {
+                        <div class="col-md-3 mb-4">
+                            <div class="card">
+                                <img src="@subasta.ImagenProducto" class="card-img-top" alt="Imagen del producto">
+                                <div class="card-body">
+                                    <h5 class="card-title">@subasta.Titulo</h5>
+                                    <p class="card-text">Precio actual: $@subasta.PrecioActual</p>
+                                    <p class="card-text">Fecha de finalización: @subasta.FechaFin</p><br />
+                                    <a href="@Url.Action("Pujar", "Home", new { subastaID = subasta.SubastaID })" class="btn btn-pujar">Pujar</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".inicio-container").hide().fadeIn(1000);
+            $("input[type=text], input[type=password]").focus(function () {
+                $(this).effect("highlight", { color: "#f6eafd" }, 500);
+            });
+            $("form").submit(function (e) {
+                var nombre = $("#Nombre").val();
+                var apellido = $("#Apellido").val();
+                var correo = $("#CorreoElectronico").val();
+                var contraseña = $("#Contraseña").val();
+                if (nombre == "" || apellido == "" || correo == "" || contraseña == "") {
+                    e.preventDefault();
+                    $(".inicio-container").effect("shake", { distance: 10 }, 500);
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        document.getElementById("filterInput").addEventListener("input", function () {
+            var filterText = this.value.toLowerCase();
+            var cards = document.querySelectorAll(".card");
+            cards.forEach(function (card) {
+                var title = card.querySelector(".card-title").textContent.toLowerCase();
+                if (title.includes(filterText)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    </script> 
+</body>
+</html>
+
+

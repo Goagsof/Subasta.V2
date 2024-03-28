@@ -1,0 +1,73 @@
+﻿@model Subasta.Models.PujarViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI CDN -->
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <!-- jQuery UI CSS CDN -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link href="~/css/pujar.css" rel="stylesheet" />
+    <title>Pujar</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Detalles de la Subasta</h2>
+        <div class="card">
+            <img src="@Model.ImagenProducto" class="card-img-top" alt="Imagen del producto">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Titulo</h5>
+                <p class="card-text">@Model.Descripcion</p>
+                <p class="card-text">Precio actual: $@Model.PrecioActual</p>
+                <p class="card-text">Fecha de inicio: @Model.FechaInicio</p>
+                <p class="card-text">Fecha de finalización: @Model.FechaFin</p>
+            </div>
+        </div>
+        <br />
+        <h3>Pujar por este artículo</h3>
+        <form action="@Url.Action("Pujar", "Home")" method="post">
+            <input type="hidden" name="SubastaID" value="@Model.SubastaID" />
+            <div class="form-group">
+                <label for="monto">Monto a pujar:</label>
+                <input type="number" step="0.01" class="form-control" id="monto" name="monto" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Pujar</button>
+        </form>
+    </div>
+    <script>
+$(document).ready(function () {
+    // Efecto de desvanecimiento al cargar la página
+    $(".container").hide().fadeIn(1000);
+
+    // Efecto de resaltado al enfocar el campo de entrada
+    $("input[type=number]").focus(function () {
+        $(this).effect("highlight", { color: "#f6eafd" }, 500);
+    });
+
+    // Efecto de sacudida al enviar el formulario con un monto inválido
+    $("form").submit(function (e) {
+        var monto = $("#monto").val();
+        var precio = @Model.PrecioActual; // Obtener el precio actual de la subasta desde el modelo
+        if (monto == "" || monto <= precio) {
+            e.preventDefault();
+            $(".container").effect("shake", { distance: 10 }, 500);
+        }
+    });
+
+    // Formato del monto con dos decimales y separador de miles
+    $("input[type=number]").on("input", function () {
+        var value = $(this).val();
+        value = value.replace(/[^0-9.]/g, ""); // Eliminar cualquier caracter que no sea número o punto
+        value = parseFloat(value).toFixed(2); // Redondear a dos decimales
+        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Añadir separador de miles
+        $(this).val(value);
+    });
+});
+
+    </script>
+</body>
+</html>

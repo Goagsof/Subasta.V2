@@ -1,0 +1,108 @@
+﻿@model Subasta.Models.PublicarViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Publicar Subasta</title>
+    <link href="~" rel="stylesheet" />
+    <link href="~/css/publicar.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI CDN -->
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <!-- jQuery UI CSS CDN -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <!-- Flatpickr CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div class="publicar-container">
+        <h2>Publicar Subasta</h2>
+        @using (Html.BeginForm("Publicar", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div>
+                @Html.LabelFor(model => model.Titulo, "Título del Artículo")
+                @Html.TextBoxFor(model => model.Titulo)
+                @Html.ValidationMessageFor(model => model.Titulo)
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Descripcion, "Descripción del Artículo")
+                @Html.TextAreaFor(model => model.Descripcion)
+                @Html.ValidationMessageFor(model => model.Descripcion)
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.PrecioActual, "Precio del Artículo")
+                @Html.TextBoxFor(model => model.PrecioActual)
+                @Html.ValidationMessageFor(model => model.PrecioActual)
+            </div>
+
+            <div>
+                @Html.Label("Fecha de Inicio", " ")
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.FechaFin, "Fecha de Fin")
+                <input type="text" id="fechaFin" name="FechaFin" readonly="readonly" data-input>
+                @Html.ValidationMessageFor(model => model.FechaFin)
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.ImagenProducto, "Imagen del Producto")
+                @Html.TextBoxFor(model => model.ImagenProducto)
+                @Html.ValidationMessageFor(model => model.ImagenProducto)
+            </div>
+
+            <input type="submit" value="Publicar" />
+        }
+
+        <button onclick="location.href='@Url.Action("Cuenta", "Home")'">Regresar</button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".publicar-container").hide().fadeIn(1000);
+
+            $("input[type=text], input[type=password], textarea").focus(function () {
+                $(this).effect("highlight", { color: "#f6eafd" }, 500);
+            });
+
+            $("form").submit(function (e) {
+                var titulo = $("#Titulo").val();
+                var descripcion = $("#Descripcion").val();
+                var precio = $("#PrecioActual").val();
+                var fechaInicio = $("#fechaInicio").val();
+                var fechaFin = $("#fechaFin").val();
+                var imagen = $("#ImagenProducto").val();
+                if (titulo == "" || descripcion == "" || precio == "" || fechaInicio == "" || fechaFin == "" || imagen == "") {
+                    e.preventDefault();
+                    $(".publicar-container").effect("shake", { distance: 10 }, 500);
+                }
+            });
+        });
+        $(document).ready(function () {
+            var fechaActual = new Date();
+            var formatoFecha = fechaActual.getFullYear() + '-' + ('0' + (fechaActual.getMonth() + 1)).slice(-2) + '-' + ('0' + fechaActual.getDate()).slice(-2);
+            var formatoHora = ('0' + fechaActual.getHours()).slice(-2) + ':' + ('0' + fechaActual.getMinutes()).slice(-2);
+
+            $("#FechaInicio").val(formatoFecha + ' ' + formatoHora);
+        });
+
+
+        flatpickr("#fechaFin", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+    </script>
+</body>
+</html>
